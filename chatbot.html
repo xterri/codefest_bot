@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="stylesheet" href="chatbotStyles.css">
+
+        <title>Cover Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS --s
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+</head>
+
+<!DOCTYPE html>
+<html>
+    <body>
+<!-- <body class="text-center"> -->
+
+<!--     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Cover</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="#">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Cover your page.</h1>
+        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+        <p class="lead">
+          <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+        </p>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+      </footer>
+    </div> -->
+
+        <div class="float-right col-sm-3 col-sm-offset-4 frame">
+            <ul></ul>
+            <div>
+                <div class="msj-rta macro">                        
+                    <div class="text text-r" style="background:whitesmoke !important">
+                        <input class="mytext" placeholder="Type a message"/>
+                    </div> 
+
+                </div>
+                <div style="padding:10px;">
+                    <span class="glyphicon glyphicon-share-alt"></span>
+                </div>                
+            </div>
+        </div>       
+    </body>
+</html>
+
+    <script type="text/javascript">
+        
+        var me = {};
+me.avatar = "Ganymede.jpg";
+
+var you = {};
+you.avatar = "cb_moose.png";
+
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}            
+
+//-- No use time. It is a javaScript effect.
+function insertChat(who, text, time){
+    if (time === undefined){
+        time = 0;
+    }
+    var control = "";
+    var date = formatAMPM(new Date());
+    
+    if (who == "me"){
+        control = '<li style="width:100%">' +
+                        '<div class="msj macro">' +
+                        '<div class="avatar"><img class="img-circle" style="width:100%;" src="'+ me.avatar +'" /></div>' +
+                            '<div class="text text-l">' +
+                                '<p>'+ text +'</p>' +
+                                '<p><small>'+date+'</small></p>' +
+                            '</div>' +
+                        '</div>' +
+                    '</li>';                    
+    }else{
+        control = '<li style="width:100%;">' +
+                        '<div class="msj-rta macro">' +
+                            '<div class="text text-r">' +
+                                '<p>'+text+'</p>' +
+                                '<p><small>'+date+'</small></p>' +
+                            '</div>' +
+                        '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="'+you.avatar+'" /></div>' +                                
+                  '</li>';
+    }
+    setTimeout(
+        function(){                        
+            $("ul").append(control).scrollTop($("ul").prop('scrollHeight'));
+        }, time);
+    
+}
+
+function resetChat(){
+    $("ul").empty();
+}
+
+$(".mytext").on("keydown", function(e){
+    if (e.which == 13){
+        var text = $(this).val();
+        if (text !== ""){
+            insertChat("me", text);              
+            $(this).val('');
+        }
+    }
+});
+
+$('body > div > div > div:nth-child(2) > span').click(function(){
+    $(".mytext").trigger({type: 'keydown', which: 13, keyCode: 13});
+})
+
+//-- Clear Chat
+resetChat();
+
+//-- Print Messages
+// insertChat("me", "Hello Tom...", 0);  
+insertChat("you", "Hi, Pablo", 0);
+insertChat("you", "Would you like to fill out a survey today about the environment?", 1500)
+insertChat("me", "Yes", 3500);
+insertChat("you", "Is the environment getting<p><form><input type=\"radio\" name=\"gender\" value=\"better\" checked> Better<br>  <input type=\"radio\" name=\"gender\" value=\"worse\"> Worse<br>  <input type=\"radio\" name=\"gender\" value=\"Same\"> Same</form>",7000);
+// insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!", 9500);
+// insertChat("you", "LOL", 12000);
+    </script>
