@@ -1,7 +1,8 @@
 'use strict';
 
-const express       = require('express');
-const bodyParser    = require('body-parser');
+const express               = require('express');
+const bodyParser            = require('body-parser');
+const dialogflow            = require('./src/bot');
 
 const PORT = 5000;
 
@@ -19,12 +20,15 @@ app.use(express.static('public'));
 
 app.route('/')
     .get(function(req, res) {
-        
-        res.render('index'); 
+        res.render('index', {resp: ""}); 
     })
     .post(function(req, res) {
-        res.redirect("/");
-});
+        let msg = req.body.text;
+
+        let responseMsg = "check";//dialogflow(msg);
+
+        res.render('index', {resp: responseMsg});
+    });
 
 let port = process.env.PORT || PORT; // production uses different port
 console.log("Server listening on port " + port);
