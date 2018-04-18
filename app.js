@@ -3,6 +3,7 @@
 const express               = require('express');
 const bodyParser            = require('body-parser');
 const dialogflow            = require('./src/bot');
+const sendEventRequest      = require('./src/eventRequest');
 
 const PORT = 5000;
 
@@ -18,16 +19,32 @@ app.set('view engine', 'ejs');
 // required to serve static files from multiple directories
 app.use(express.static('public'));
 
+// set up welcome msg
+const welcomeEvent = {
+    name: "welcome",
+    data: {},
+    // followupEvent: {
+    //     name: "participation",
+    //     data: { yes: "Great!", no: "Maybe next time"}
+    // },
+};
+
 app.route('/')
     .get(function(req, res) {
-        res.render('index', {resp: ""}); 
+        // on every page reload, welcome msg starts over
+        sendEventRequest(welcomeEvent, process.env.SESSION_ID)
+            .then(function(reply) {
+                res.render('index', {resp: reply.result.fulfillment.speech});
+            }, function(error) {
+                console.error("Boo error from DF: " + error)
+            });
     })
     .post(function(req, res) {
         let msg = req.body.text;
-        console.log('Message from user: ' + msg);
+        console.log('Message from user: ' + msg + "\n");
         dialogflow(msg).then(
             function(resMsg) {
-                console.log('Got response from DF: ' + resMsg);
+                console.log('Got response from DF: ' + resMsg + "\n");
                 res.send(resMsg);
             },
             function(err) {

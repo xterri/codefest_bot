@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html> 
 <html lang="en">
 <head>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -123,11 +123,14 @@
         $("ul").empty();
     }
 
+    var greeting = (<%- JSON.stringify(resp) %>);
+    insertChat("you", greeting);
+
     $(".mytext").on("keydown", function(e){
         if (e.which == 13){
             var text = $(this).val();
             if (text !== ""){
-                insertChat("me", text);  
+                insertChat("me", text);
                 $(this).val('');
                 $.ajax({
                     type: "POST",
@@ -135,15 +138,15 @@
                     data: {text},
                 })
                 .then( function(response) {
-                    console.log('Got response: ' + response);
-                    insertChat("you", response);
+                    console.log('Got response: ' + response + '\n');
+                    insertChat("you", response, 1000);
                 }, function(err) {
                     console.error('Got error: ' + JSON.stringify(err,null,2));
                 });
             }
         }
     });
-
+    
     $('body > div > div > div:nth-child(2) > span').click(function(){
         $(".mytext").trigger({type: 'keydown', which: 13, keyCode: 13});
     })
