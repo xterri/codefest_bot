@@ -40,6 +40,7 @@ app.route('/')
             });
     })
     .post(function(req, res) {
+        console.log(req.body);
         let msg = req.body.text;
         console.log('Message from user: ' + msg + "\n");
         dialogflow(msg).then(

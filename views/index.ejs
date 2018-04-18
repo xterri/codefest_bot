@@ -123,6 +123,34 @@
         $("ul").empty();
     }
 
+    function sendMsg(msg){
+        $.ajax({
+            type: "POST",
+            url: "/",
+            data: {text: msg},
+        })
+        .then( function(response) {
+            console.log('Got response: ' + response + '\n');
+            insertChat("you", response, 1000);
+        }, function(err) {
+            console.error('Got error: ' + JSON.stringify(err,null,2));
+        });
+    }
+
+    function disableRadios(name) {
+        $(":radio[name='" + name + "']:not(:checked)").attr("disabled", true);
+    }
+
+    function radioSelected(name) {
+        let val = $("input[name='" + name + "']:checked").val();
+        
+        //disable radio button(s) after selected
+        disableRadios(name);
+
+        // pass value to bot
+        sendMsg(val);
+    };
+
     var greeting = (<%- JSON.stringify(resp) %>);
     insertChat("you", greeting);
 
@@ -132,17 +160,8 @@
             if (text !== ""){
                 insertChat("me", text);
                 $(this).val('');
-                $.ajax({
-                    type: "POST",
-                    url: "/",
-                    data: {text},
-                })
-                .then( function(response) {
-                    console.log('Got response: ' + response + '\n');
-                    insertChat("you", response, 1000);
-                }, function(err) {
-                    console.error('Got error: ' + JSON.stringify(err,null,2));
-                });
+
+                sendMsg(text);
             }
         }
     });
