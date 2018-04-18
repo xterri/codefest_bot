@@ -24,10 +24,15 @@ app.route('/')
     })
     .post(function(req, res) {
         let msg = req.body.text;
-
-        let responseMsg = "check";//dialogflow(msg);
-
-        res.render('index', {resp: responseMsg});
+        console.log('Message from user: ' + msg);
+        dialogflow(msg).then(
+            function(resMsg) {
+                console.log('Got response from DF: ' + resMsg);
+                res.send(resMsg);
+            },
+            function(err) {
+                console.error('Got error from DF: ' + err);
+            })
     });
 
 let port = process.env.PORT || PORT; // production uses different port

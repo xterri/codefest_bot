@@ -127,19 +127,19 @@
         if (e.which == 13){
             var text = $(this).val();
             if (text !== ""){
+                insertChat("me", text);  
+                $(this).val('');
                 $.ajax({
                     type: "POST",
                     url: "/",
-                    data: {text}
+                    data: {text},
+                })
+                .then( function(response) {
+                    console.log('Got response: ' + response);
+                    insertChat("you", response);
+                }, function(err) {
+                    console.error('Got error: ' + JSON.stringify(err,null,2));
                 });
-                insertChat("me", text);  
-                $(this).val('');
-                
-                let resp = JSON.parse('<%=JSON.stringify(resp)%>');
-                console.log("from func: ", resp);
-                // var botResponse = <%- JSON.stringify(resp) %>
-                // console.log("bot: ", botResponse);
-                insertChat("you", <%=resp%>);
             }
         }
     });
@@ -153,10 +153,10 @@
 
     //-- Print Messages
     // insertChat("me", "Hello Tom...", 0);  
-    insertChat("you", "Hi, Pablo", 0);
-    insertChat("you", "Would you like to fill out a survey today about the environment?", 1500)
-    insertChat("me", "Yes", 3500);
-    insertChat("you", "Is the environment getting<p><form><input type=\"radio\" name=\"gender\" value=\"better\" checked> Better<br>  <input type=\"radio\" name=\"gender\" value=\"worse\"> Worse<br>  <input type=\"radio\" name=\"gender\" value=\"Same\"> Same</form>",7000);
+    // insertChat("you", "Hi, Pablo", 0);
+    // insertChat("you", "Would you like to fill out a survey today about the environment?", 1500)
+    // insertChat("me", "Yes", 3500);
+    // insertChat("you", "Is the environment getting<p><form><input type=\"radio\" name=\"gender\" value=\"better\" checked> Better<br>  <input type=\"radio\" name=\"gender\" value=\"worse\"> Worse<br>  <input type=\"radio\" name=\"gender\" value=\"Same\"> Same</form>",7000);
     // insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!", 9500);
     // insertChat("you", "LOL", 12000);
     </script>
