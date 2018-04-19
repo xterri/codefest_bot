@@ -1,8 +1,8 @@
 const dialogflowClient      = require('apiai')(process.env.DF_ACCESS_TOKEN);
 const handleActions         = require('./handleActions');
 
-module.exports = (msg) => {
-    const dialogflowSession = dialogflowClient.textRequest(msg, {sessionId: process.env.SESSION_ID});
+module.exports = (msg, sessionId) => {
+    const dialogflowSession = dialogflowClient.textRequest(msg, {sessionId: sessionId});
     let responseMsg = "";
 
     return (new Promise(function(resolve, reject) {

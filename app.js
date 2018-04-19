@@ -1,6 +1,7 @@
 'use strict';
 
 const express               = require('express');
+const session               = require('express-session');
 const bodyParser            = require('body-parser');
 const dialogflow            = require('./src/bot');
 const sendEventRequest      = require('./src/eventRequest');
@@ -19,7 +20,13 @@ app.set('view engine', 'ejs');
 // required to serve static files from multiple directories
 app.use(express.static('public'));
 
-// set up welcome msg
+// set user's sessionId
+app.use(session({
+    secret: process.env.SESSION_SECRET, // 'thisisasecret'
+    cookie: { }
+}));
+
+// set up welcome msg (example)
 const welcomeEvent = {
     name: "welcome",
     data: {},
@@ -31,8 +38,15 @@ const welcomeEvent = {
 
 app.route('/')
     .get(function(req, res) {
+        let sessData = req.session;      
+
+        // set user sessionId to random string once user loads the page 
+        sessData.sessionId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+
+        console.log("set sessionId: ", sessData.sessionId)
+
         // on every page reload, welcome msg starts over
-        sendEventRequest(welcomeEvent, process.env.SESSION_ID)
+        sendEventRequest(welcomeEvent, sessData.sessionId)
             .then(function(reply) {
                 res.render('index', {resp: reply.result.fulfillment.speech});
             }, function(error) {
@@ -40,10 +54,10 @@ app.route('/')
             });
     })
     .post(function(req, res) {
-        console.log(req.body);
+        console.log("sessionId: ", req.session.sessionId);
         let msg = req.body.text;
         console.log('Message from user: ' + msg + "\n");
-        dialogflow(msg).then(
+        dialogflow(msg, req.session.sessionId).then(
             function(resMsg) {
                 console.log('Got response from DF: ' + resMsg + "\n");
                 res.send(resMsg);
