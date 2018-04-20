@@ -11,7 +11,7 @@ module.exports = (msg, sessionId) => {
             responseMsg = response.result.fulfillment.speech;
 
             // add custom comments/html with response
-            responseMsg += handleActions(response.result.action);
+            responseMsg += handleActions(response.result.action, response.lang);
 
             // console.log(responseMsg + '\n');
             resolve(responseMsg);

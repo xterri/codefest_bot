@@ -1,0 +1,226 @@
+{
+    "DefaultWelcomeIntent-yes": {
+        "msgs": {
+            "en": [
+                "<br>Which one are you interested in?"
+            ],
+            "ja": [
+                "<br>どちらに興味がありますか？"
+            ]
+        },
+        "inputs": {
+            "type": "radio",
+            "name": "category",
+            "value": {
+                "en": {
+                    "category_vote": " Voting",
+                    "category_climateChange": " Climate Change",
+                    "category_tourism": " Tourism"
+                },
+                "ja": {
+                    "category_vote": " 投票",
+                    "category_climateChange": " 気候変動",
+                    "category_tourism": " 観光"
+                }
+            }
+        }
+    },
+    "categoryClimate.categoryClimate-yes": {
+        "msgs": {
+            "en": [
+                "<br><a href='https://www.theguardian.com/environment/2013/feb/07/polar-bears-fed-by-humans-survive?CMP=twt_gu'> Polar Bears Fed by Humans Survive</a><p>Let us know when you're done by typing in \"I'm finished\" or \"I'm done\"</p>"
+            ],
+            "ja": [
+                "<br><a href='https://www.theguardian.com/environment/2013/feb/07/polar-bears-fed-by-humans-survive?CMP=twt_gu'> Polar Bears Fed by Humans Survive</a><p>終ったら、’終わる’ か ’やりました’書いて下さい。</p>"
+            ]
+        }
+    },
+    "categoryClimate.readingComplete": {
+        "inputs": {
+            "type": "radio",
+            "name": "climateQ1_ready",
+            "value": {
+                "en": {
+                    "yes": " Yes",
+                    "no": " No"
+                },
+                "ja": {
+                    "はい": " はい",
+                    "いいえ": " いいえ"
+                }
+            }
+        }
+    },
+    "climateReadDone.climateReadDone-yes": {
+        "msgs": {
+            "en": [
+                "<script>sendMsg('start_climateQ1')</script>"
+            ],
+            "ja": [
+                "<script>sendMsg('start_climateQ1')</script>"
+            ]
+        }
+    },
+    "categoryClimate.categoryClimate-no": {
+        "msgs": {
+            "en": [
+                "<script>sendMsg('start_climateQ1')</script>"
+            ],
+            "ja": [
+                "<script>sendMsg('start_climateQ1')</script>"
+            ]
+        }
+    },
+    "climateQ1": {
+        "inputs": {
+            "type": "radio",
+            "name": "climateQ1",
+            "value": {
+                "en": {
+                    "climateQ1_yes": " Yes",
+                    "climateQ1_no": " No"
+                },
+                "ja": {
+                    "climateQ1_yes": " はい",
+                    "climateQ1_no": " いいえ"
+                }
+            }
+        }
+    },
+    "climateQ1.climateQ1-custom": {
+        "msgs": {
+            "en": [
+                "<script>sendMsg('start_climateQ2')</script>"
+            ],
+            "ja": [
+                "<script>sendMsg('start_climateQ2')</script>"
+            ]
+        }
+    },
+    "climateQ2": {
+        "inputs": {
+            "type": "radio",
+            "name": "climateQ2",
+            "value": {
+                "en": {
+                    "yes": " Yes",
+                    "no": " No"
+                },
+                "ja": {
+                    "はい": " はい",
+                    "いいえ": " いいえ"
+                }
+            }
+        }
+    },
+    "climateQ2.climateQ2-yes": {
+        "inputs": {
+            "type": "radio",
+            "name": "climateQ2_followup",
+            "value": {
+                "en": {
+                    "less_than_1cm": " Less than 1 centimetre",
+                    "between_1-4cm": " Between 1-4 centimetres",
+                    "more_than_4cm": " More than 4 centimetres"
+                },
+                "ja": {
+                    "less_than_1cm": " 1 センチメートル 以下",
+                    "between_1-4cm": " 1-4 センチメートル間に",
+                    "more_than_4cm": " 4 センチメートル以上"
+                }
+            }
+        }
+    },
+    "climateQ2.climateQ2-no": {
+        "msgs": {
+            "en": [
+                "<script>sendMsg('start_climateQ3')</script>"
+            ],
+            "ja": [
+                "<script>sendMsg('start_climateQ3')</script>"
+            ]
+        }
+    },
+    "climateQ2.climateQ2-yes.climateQ2-yes-custom": {
+        "msgs": {
+            "en": [
+                "<script>sendMsg('start_climateQ3')</script>"
+            ],
+            "ja": [
+                "<script>sendMsg('start_climateQ3')</script>"
+            ]
+        }
+    },
+    "climateQ3": {
+        "inputs": {
+            "type": "radio",
+            "name": "climateQ3",
+            "value": {
+                "en": {
+                    "yes": " Yes",
+                    "no": " No"
+                },
+                "ja": {
+                    "はい": " はい",
+                    "いいえ": " いいえ"
+                }
+            }
+        }
+    },
+    "climateQ3.climateQ3-yes": {
+        "inputs": {
+            "type": "radio",
+            "name": "climateQ3_followup",
+            "value": {
+                "en": {
+                    "climateQ3_birds": " Birds",
+                    "climateQ3_fish": " Fish",
+                    "climateQ3_polar_bears": " Polar Bears"
+                },
+                "ja": {
+                    "climateQ3_birds": " 鳥",
+                    "climateQ3_fish": " 魚",
+                    "climateQ3_polar_bears": " 北極熊"
+                }
+            }
+        }
+    },
+    "climateQ3.climateQ3-no": {
+        "msgs": {
+            "en": [
+                "<script>sendMsg('start_climateQ4')</script>"
+            ],
+            "ja": [
+                "<script>sendMsg('start_climateQ4')</script>"
+            ]
+        }
+    },
+    "climateQ3.climateQ3-yes.climateQ3-yes-custom": {
+        "msgs": {
+            "en": [
+                "<script>sendMsg('start_climateQ4')</script>"
+            ],
+            "ja": [
+                "<script>sendMsg('start_climateQ4')</script>"
+            ]
+        }
+    },
+    "climateQ4": {
+        "inputs": {
+            "type": "radio",
+            "name": "climateQ4",
+            "value": {
+                "en": {
+                    "less_than_0.05%": " Less than 0.05%",
+                    "between_0.06%_and_1%": " Between 0.06% and 1%",
+                    "more_than_1%": " More than 1%"
+                },
+                "ja": {
+                    "less_than_0.05%": " 0.05% 以下",
+                    "between_0.06%_and_1%": " 0.06% - 1% 間に",
+                    "more_than_1%": " 1% 以上"
+                }
+            }
+        }
+    }
+}
