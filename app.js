@@ -5,6 +5,7 @@ const session               = require('express-session');
 const bodyParser            = require('body-parser');
 const dialogflow            = require('./src/bot');
 const sendEventRequest      = require('./src/eventRequest');
+const handleActions         = require('./src/handleActions');
 
 const PORT = 5000;
 
@@ -42,22 +43,30 @@ app.route('/')
 
         // set user sessionId to random string once user loads the page 
         sessData.sessionId = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
-
-        console.log("set sessionId: ", sessData.sessionId)
+        
+        // set language to 'english' as default
+        sessData.language = 'en';
 
         // on every page reload, welcome msg starts over
-        sendEventRequest(welcomeEvent, sessData.sessionId)
+        sendEventRequest(welcomeEvent, sessData.sessionId, sessData.language)
             .then(function(reply) {
-                res.render('index', {resp: reply.result.fulfillment.speech});
+                let resp = reply.result.fulfillment.speech;
+                resp += handleActions(reply.result.action, sessData.language);
+
+                res.render('index', {resp});
             }, function(error) {
                 console.error("Boo error from DF: " + error)
             });
     })
     .post(function(req, res) {
-        console.log("sessionId: ", req.session.sessionId);
         let msg = req.body.text;
-        console.log('Message from user: ' + msg + "\n");
-        dialogflow(msg, req.session.sessionId).then(
+
+        if (msg === 'languageSelect_ja') {
+            req.session.language = 'ja';
+        };
+
+        // console.log('Message from user: ' + msg + "\n");
+        dialogflow(msg, req.session.sessionId, req.session.language).then(
             function(resMsg) {
                 console.log('Got response from DF: ' + resMsg + "\n");
                 res.send(resMsg);
