@@ -1,5 +1,31 @@
 {
-    "DefaultWelcomeIntent-yes": {
+    "input.welcome": {
+        "inputs": {
+            "type": "radio",
+            "name": "languageSelect",
+            "value": {
+                "en": {
+                    "languageSelect_en": " English",
+                    "languageSelect_ja": " Japanese"
+                },
+                "ja": {
+                    "languageSelect_en": " 英語",
+                    "languageSelect_ja": " 日本語"
+                }
+            }
+        }
+    },
+    "DefaultWelcomeIntent.DefaultWelcomeIntent-custom": {
+        "msgs": {
+            "en": [
+                "Okay! Changing the language to English.<script>sendMsg('start_makePrediction')</script>"
+           ],
+            "ja": [
+                "はい、ちょっと待ってて、今語を変わっています。<script>sendMsg('start_makePrediction')</script>"
+            ]
+        }
+    },
+    "makePrediction.makePrediction-yes": {
         "msgs": {
             "en": [
                 "<br>Which one are you interested in?"
