@@ -22,27 +22,32 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <div>
+        <div class="container-fluid">
             <div>
                 <img width="100%" height="auto" src="/imgs/landing-graphic.jpg" />
             </div>
             <div class="videoWrapper">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/Es44QTJmuZ0?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
-            <div class="float-right col-sm-3 col-sm-offset-4 frame">
-                <ul></ul>
-                <div>
-                    <div class="msj-rta macro">                        
-                        <div class="text text-r" style="background:whitesmoke !important">
-                            <input class="mytext" placeholder="Type a message"/>
-                        </div> 
+            <div class="row">
+                <div class="col-sm-3 frame">
+                    <ul></ul>
+                    <div>
+                        <div class="msj-rta macro">                        
+                            <div class="text text-r" style="background:whitesmoke !important">
+                                <input class="mytext" placeholder="Type a message"/>
+                            </div> 
+                        </div>
+                        <button type="button" class="btn btn-default" onClick="">
+                            <span class="glyphicon glyphicon-share-alt"></span>
+                        </button>                
                     </div>
-                    <div style="padding:10px;">
-                        <span class="glyphicon glyphicon-share-alt"></span>
-                    </div>                
+                </div>
+                <div class="col-sm-auto frame">
+                    <img width="100%" src="/imgs/side-graphic.jpg" />
                 </div>
             </div>
-            <div style="margin:10px">
+            <div style="margin:10px; display:none;">
                 <button type="button" class="btn btn-default" onClick="reloadPage()">
                     <span class="glyphicon glyphicon-retweet"></span>
                 </button>
