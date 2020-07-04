@@ -23,7 +23,7 @@ app.use(express.static('public'));
 
 // set user's sessionId
 app.use(session({
-    secret: process.env.SESSION_SECRET, // 'thisisasecret'
+    secret: process.env.SESSION_SECRET,
     cookie: { }
 }));
 
